@@ -1,0 +1,211 @@
+ADMIN FUNCTIONALITY
+ *************************************************************************************
+ * module               : Admin_LogIn
+ * Author Name          : Team 2 
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : -
+ *************************************************************************************
+            
+	       SUB Admin_LogIn	
+			
+		FOR	Lock_Status = 0
+			{
+			        IF
+					Username AND Password Match FROM TABLE User_Table
+					THEN 
+					CALL Admin_HomePage
+						
+												
+				ELSE 
+					
+					RAISE EmpManagementException ("Invalid Password")
+					LogIn_CounterAdmin = LogIn_CounterAdmin+1
+						
+						IF 
+							LogIn_CounterAdmin =3
+							THEN
+							Lock_Status = 1 INTO User_Table
+							PRINT "Your Account is Blocked "                                                        Contact Your Home Branch"
+						
+						ELSE 
+						
+							CALL Admin_LogIn
+										
+						ENDIF
+					
+				ENDIF
+		END SUB
+		 
+	
+ *************************************************************************************
+ * module               : Admin_HomePage
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Aug-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 
+		 
+  
+		SUB Admin_HomePage	
+			
+			SET LogIn_CounterAdmin = 0
+			RECORD Emp
+				DECLARE EmpId as INTEGER
+				DECLARE First Name AS STRING
+				DECLARE Last Name AS STRING
+				DECLARE Date Of Birth AS DATE
+				DECLARE Date of Joining AS DATE
+				DECLARE Department_Id AS NUMBER
+				DECLARE Grade AS STRING
+				DECLARE Designation AS STRING
+				DECLARE Basic_Salary AS REAL
+				DECLARE Gender AS CHAR
+				DECLARE Maritial Status AS STRING
+				DECLARE Address AS STRING
+				DECLARE Contact Number AS NUMBER
+			END RECORD
+			
+			DISPLAY Attributes of Admin
+				
+				PRINT LINK "Add New Record" ON CLICK CALL Add_NewEmployee
+				PRINT LINK "Delete Record" ON CLICK CALL Delete_Employee
+				PRINT LINK "Update Record" ON CLICK CALL Update_Employee
+				PRINT LINK "View all" ON CLICK CALL View_Employee
+
+		END SUB
+
+
+		
+ *************************************************************************************
+ * module               : Add_NewEmployee
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 	
+		
+        SUB  Add_NewAccount
+			
+			PROMPT Enter Details
+			{	
+				If isvalid(Employee_Id) 
+				
+				{	
+				DECLARE Emp AS Employee
+				Emp.id
+				Emp.First Name 
+				Emp.Last Name 
+				Emp.Date Of Birth
+				Emp.Date of Joining
+				Emp.Department_Id
+				Emp.Grade
+				Emp.Designation
+				Emp.Basic_Salary
+				Emp.Gender
+				Emp.Maritial Status
+				Emp.Address 
+				Emp.Contact Number
+				Add Details
+			}
+			else EmpManagementException ("Invalid ID")
+			}
+			
+			
+		END SUB
+		
+		
+ *************************************************************************************
+ * module               : Delete_Employee
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 	
+		
+        SUB  Delete_Employee
+			
+			PROMPT Delete Details
+			{	
+				If isvalid(Employee_Id) 
+					DELETE RECORD
+					else EmpManagementException ("Invalid ID")
+
+
+*************************************************************************************
+ * module               : Update_Employee
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 	
+		
+        SUB  Update_Employee
+			PROMPT Enter Employee Id STORE IN Employee_Id
+			If isvalid (Employee_Id)
+			UPDATE
+			{	
+				DECLARE Emp AS Employee
+				Emp.First Name 
+				Emp.Last Name 
+				Emp.Department_Id
+				Emp.Designation
+				Emp.Maritial Status
+				Emp.Address 
+				Emp.Contact Number
+				If 
+				Update IN Emp.Grade
+				THEN
+				Update Emp.Basic_Salary
+			}
+			ELSE 
+			PRINT "WRONG Employee Id"
+
+			
+		END SUB
+*************************************************************************************
+ * module               : View_Employee
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 	
+		
+        SUB  View_Employee
+			
+			Display Details
+			{	
+				DECLARE Emp AS Employee
+				Emp.Id
+				Emp.First_Name 
+				Emp.Last_Name 
+				Emp.Department_Id
+				Emp.Grade
+				Emp.Designation
+				
+			}
+
+			
+		END SUB
+		
+*************************************************************************************
+ * module               : isValid()
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the admin functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 	
+		SUB isValid(Employee_Id)
+		IF(isDigits(data)) THEN
+		   RETURN true
+			ELSE
+			  RETURN false
+		END IF
+		END SUB

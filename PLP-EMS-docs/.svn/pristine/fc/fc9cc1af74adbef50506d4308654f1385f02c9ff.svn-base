@@ -1,0 +1,4 @@
+
+src/com/igate/ecommerce/controller/LogInfo.java:15	Document empty method
+src/com/igate/ecommerce/controller/LogInfo.java:20	Avoid unused local variables such as 'point'.
+src/com/igate/ecommerce/controller/LogInfo.java:31	Avoid empty catch blocks

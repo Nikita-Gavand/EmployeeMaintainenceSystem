@@ -1,0 +1,53 @@
+DROP TABLE User_master CASCADE CONSTRAINTS;
+CREATE TABLE User_master(
+		UserId VARCHAR2(6) NOT NULL ,
+		UserName VARCHAR2(15), 
+		UserPassword VARCHAR2(50), 
+		UserType VARCHAR2(10) );
+
+
+Drop SEQUENCE user_id_seq;
+CREATE SEQUENCE user_id_seq
+START WITH 1000
+INCREMENT BY 1
+NOCYCLE;
+
+
+INSERT INTO user_master VALUES(user_id_seq.nextVal,'Krishna','krishna123','ADMIN');
+INSERT INTO user_master VALUES(user_id_seq.nextVal,'Ravi','Ravi123','Employee');
+INSERT INTO user_master VALUES(user_id_seq.nextVal,'Pawan','pawan123','ADMIN');
+INSERT INTO user_master VALUES(user_id_seq.nextVal,'Madhu','madhu123','ADMIN');
+INSERT INTO user_master VALUES(user_id_seq.nextVal,'Neha','neha123','ADMIN');
+INSERT INTO user_master VALUES(user_id_seq.nextVal,'Nisha','nisha123','Employee');
+
+
+
+DROP TABLE Grade_master CASCADE CONSTRAINTS;
+CREATE TABLE Grade_master
+		(Grade_Code VARCHAR2(2) NOT NULL PRIMARY KEY,
+		 Description VARCHAR2(20),
+		 Min_Salary int,
+		 Max_Salary int);
+
+INSERT INTO Grade_master VALUES('M1','Clerk',5000,9999);
+INSERT INTO Grade_master VALUES('M2','Jr.Engineer',10000,19999);
+INSERT INTO Grade_master VALUES('M3','Sr.Engineer',20000,39999);
+INSERT INTO Grade_master VALUES('M4','Trainer',40000,59999);
+INSERT INTO Grade_master VALUES('M5','Project Manager',60000,79999);
+INSERT INTO Grade_master VALUES('M6','HR',80000,99999);
+INSERT INTO Grade_master VALUES('M7','Manager',100000,500000);
+
+
+DROP TABLE Department CASCADE CONSTRAINTS;
+CREATE TABLE Department(
+		Dept_ID int NOT NULL PRIMARY KEY,
+		Dept_Name VARCHAR2(50));     
+
+
+INSERT INTO department VALUES(10,'Computer Science');
+INSERT INTO department VALUES(20,'Electricals');
+INSERT INTO department VALUES(30,'Electronics');
+INSERT INTO department VALUES(40,'Mechanics');
+INSERT INTO department VALUES(50,'Robotics');
+
+

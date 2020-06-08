@@ -1,0 +1,80 @@
+USER FUNCTIONALITY
+ *************************************************************************************
+ * module               : User_LogIn
+ * Author Name          : Team 2 
+ * Desc                 : Pseudo code For the user functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Sep-2016
+ * Change Description   : -
+ *************************************************************************************
+            
+	       SUB User_LogIn	
+			
+		FOR	Lock_Status = 0
+			{
+			        IF
+					Username AND Password Match FROM TABLE User_Table
+					THEN 
+					CALL User_HomePage
+						
+												
+				ELSE 
+					
+					RAISE EmpManagementException ("Invalid Password")
+					LogIn_CounterUser = LogIn_CounterUser+1
+						
+						IF 
+							LogIn_CounterUser =3
+							THEN
+							Lock_Status = 1 INTO User_Table
+							PRINT "Your Account is Blocked "                                                        Contact Your Home Branch"
+						
+						ELSE 
+						
+							CALL User_LogIn
+										
+						ENDIF
+					
+				ENDIF
+		END SUB
+		 
+	
+ *************************************************************************************
+ * module               : User_HomePage
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the user functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Aug-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 
+		 
+  
+		SUB User_HomePage
+			DISPLAY Attributes of Admin
+			
+			PRINT LINK "Search By Id" ON CLICK CALL Search By Id
+				PRINT LINK "Search By First Name" ON CLICK CALL Search By First Name
+				PRINT LINK "Search By Last Name" ON CLICK CALL Search By Last Name
+				PRINT LINK "Search By Department" ON CLICK CALL Search By Department
+				PRINT LINK "Search By Grade" ON CLICK CALL Search By Grade
+				PRINT LINK "Search By Marital Status" ON CLICK CALL Search By Marital Status
+				END SUB
+
+*************************************************************************************
+ * module               : Display_details
+ * Author Name          : Team 2
+ * Desc                 : Pseudo code For the user functionality
+ * Version              : 1.2
+ * Last Modified Date   : 13-Aug-2016
+ * Change Description   : Description about the changes implemented in tables
+ *************************************************************************************	 
+ 
+		SUB  Display_Employee
+			SELECT the required fields to be searched
+			Display Emp_details
+			
+ 
+
+
+		
+ 

@@ -1,0 +1,163 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.igate.eshop.entity.*"%>
+<%@ page import="java.util.*"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+ <%--  
+ *****************************************************************************************************************
+ * Description:	Presentation Layer for Customer View Item Screen
+ * Functionality:	This is a Jsp, which shows the Description, Name, price and quantity of a selected item.
+ *Author:		aa815803,mk815850,ss815801,kp815871,ns815843,bv815844,nm815851
+ * Version:		1.0
+ * Style Sheet:	iGate.css
+ * Created on:	24/12/2013
+ ******************************************************************************************************************** 
+--%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>View Item</title>
+
+<link href=<c:url value="/styles/iGate.css"/> rel="stylesheet" type="text/css" />
+<script src=<c:url value="../javascript/slide.js"/>
+	type="text/javascript"></script>
+</head>
+<% 
+	List<ProductImage> listImageDetails=null;
+	List<Product> listProductDetails=new ArrayList<Product>();
+	int productDetailsSize=0;
+%>
+<body>
+<div id="site-wrapper"><!--Header wrapper Starts here-->
+<div id="header-wrapper">
+<div id="top-header">
+<div id="left-top-header"><a href="index.htm"><img src="/Eshop/images/logo_small.png" id="logo"></img></a></div>
+<div id="middile-top-header">
+<form action="" method="post"><input type="text" id="searchText" class="tfsearch" size="30" maxlength="120" /> <input class="srcbutton" type="button" value="SEARCH" /></form>
+</div>
+<div id="right-top-header">
+<div id="greeting-wrapper">
+<div id="welcome-message">
+<%
+					if(session.getAttribute("isLogged")!=null)
+						{
+					%>
+<p>Welcome<span id="user">,${isLogged}</span></p>
+<%
+						}
+					%>
+</div>
+<div id="login-register-option">
+<%
+					if(session.getAttribute("isLogged")==null)
+						{
+					%> <a href="prepareLoginPage.htm">Login</a>|<a href="prepareRegisterPage.htm">Register</a>
+<%
+						} 
+					%> <%
+					if(session.getAttribute("isLogged")!=null)
+						{
+					%> <span id="logout"><a href="prepareLogoutPage.htm">Logout</a></span> <%
+						}
+					%>
+</div>
+</div>
+
+<div id="cart-container">
+<% 
+					if(session.getAttribute("isLogged")!=null)
+						{
+				%> <a href="gotoAddToCartPage.htm"><img src="/Eshop/images/Cart.png" id="cart-image"></img></a> <%
+						}
+				%>
+</div>
+</div>
+</div>
+<div id="menu-wrapper">
+<table id="menu-table">
+	<tr align="center">
+		<td>
+		<ul>
+			<c:forEach var="category" items="${categoryMap}">
+				<li>${category.key}
+				<ul>
+					<c:set var="subCategory" value="${category.value}"></c:set>
+					<c:forEach var="data" items="${subCategory}">
+						<li><a href="getProductsByCategory.htm?categoryName=${data}">${data}</a></li>
+					</c:forEach>
+				</ul>
+				</li>
+			</c:forEach>
+		</ul>
+		</td>
+	</tr>
+</table>
+</div>
+</div>
+
+<div id="body-wrapper">
+
+	<div id="itemDescriptionHeader">
+		<p>ITEM DESCRIPTION</p>
+	</div>
+	
+	<div id="itemDescriptionBody">
+		<c:url var="myAction" value="proceedToAddToCartPage.htm" />
+		<form:form method="post" modelAttribute="product" action="${myAction}">
+		<div id="itemDescriptionLeftBody"><img src="${product.productImage.image}" id="itemDescriptionImage" /></div>
+		<div id="itemDescriptionRightBody">
+		<div id="itemDescriptionDetails">
+		<table align="center">
+			<tr>
+				<td colspan="2" >${product.productDescription}</td>
+			</tr>
+			<tr>
+				<td><b>Name:</b></td>
+				<td>${product.productName}</td>
+			</tr>
+			<tr>
+				<td><b>Price:</b></td>
+				<td>Rs.${product.productPrice}</td>
+			</tr>
+			<tr>
+				<td><b>Available Stock:</b></td>
+				<td>${product.quantity}</td>
+			</tr>
+			<tr>
+				<td><b>Enter Quantity:</b></td>
+				<td><input type="text" name="userQuantity"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="SUBMIT" value="Add to Cart" class="buttonclass" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<c:if test="${errorMsg ne null}">
+						<span class="errorMessage">${errorMsg}</span>
+					</c:if>
+				</td>
+			</tr>
+		</table>
+		<form:hidden path="productId"></form:hidden>
+		<form:hidden path="productName"></form:hidden>
+		<form:hidden path="productPrice"></form:hidden>
+		<form:hidden path="quantity"></form:hidden>
+		<form:hidden path="productDescription"></form:hidden>
+		<form:hidden path="productImage.image"></form:hidden>
+		</div>
+	</div>
+</form:form>
+</div>
+</div>
+<div id="footer-wrapper">
+<div id="copyright">Copyright &copy; 2012. iGATE Corporation. All Rights Reserved.</div>
+<div id="top"><a href="#header-wrapper"><img src="/Eshop/images/top.PNG"></img></a></div>
+</div>
+</div>
+</body>
+</html>
